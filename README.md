@@ -8,5 +8,7 @@
   </li>
   <li>
   <img src="./doc/demo_05.png"/>
+  <img src="./doc/demo_06.png"/>
+  <img src="./doc/demo_07.png"/>
   </li>
 </ol>

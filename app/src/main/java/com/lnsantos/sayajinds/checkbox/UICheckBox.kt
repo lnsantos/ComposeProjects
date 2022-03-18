@@ -23,13 +23,13 @@ import com.lnsantos.sayajinds.color.SayajinColor
 @Preview
 @Composable
 private fun preview(){
-    var state by remember { mutableStateOf(true) }
+    var state by remember { mutableStateOf(false) }
 
     UICheckBoxText(
-        scale = 4f,
+        scale = 1f,
         onState = { },
         enabled = mutableStateOf(state),
-        text = "Accept contract"
+        text = "Accept contract",
     )
 }
 
@@ -43,7 +43,7 @@ fun UICheckBoxText(
     fontWeight: FontWeight = FontWeight.Bold,
     onState:(Boolean) -> Unit,
     startState: Boolean = false,
-    enabled: MutableState<Boolean> = mutableStateOf(false),
+    enabled: MutableState<Boolean> = mutableStateOf(true),
     checkedColor: Color = SayajinColor.getColor().YellowBrand100,
     uncheckedColor: Color = Color.Red,
     checkmarkColor: Color = SayajinColor.getColor().RedBrand100

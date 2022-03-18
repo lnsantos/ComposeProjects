@@ -61,6 +61,7 @@ internal class MainActivity : ComponentActivity() {
 fun DefaultPreview(ctx: Context?) {
     var enabledButton by remember { mutableStateOf(true) }
     var enabledLoading by remember { mutableStateOf(false) }
+    var stateCheckbox by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.background(SayajinColor.UI.BackgroundScreen)
@@ -248,20 +249,36 @@ fun DefaultPreview(ctx: Context?) {
                     .align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center
             )
+
+            UIButton(
+                style = UIButtonStyle.Simples(
+                    backgroundColor = SayajinColor.getColor().WhiteBrand100,
+                    text = "CheckBox ${
+                        if (stateCheckbox) "[ON]" else "[OFF]"
+                    } ",
+                    textColor = SayajinColor.getColor().RedBrand100,
+                    enabled = true,
+                    imagem = UIButtonImage(
+                        icon = android.R.drawable.ic_media_ff
+                    )
+                ),
+                onClickCallback = { stateCheckbox = !stateCheckbox },
+                modifier = Modifier.fillMaxWidth()
+            )
             Column(
-                Modifier.background(Color(0xFFECA6E9))
+                Modifier.background(Color(0xFFECA6E9)).padding(8.dp)
             ) {
                 UICheckBoxText(
                     onState = { },
-                    enabled = mutableStateOf(value = true),
+                    enabled = mutableStateOf(stateCheckbox),
                     uncheckedColor = SayajinColor.getColor().BlueBrand100,
                     scale = 1f,
                     text = "Accept contract",
-                    fontColor = SayajinColor.getColor().RedBrand100
+                    fontColor = SayajinColor.getColor().RedBrand100,
                 )
                 UICheckBoxText(
                     onState = { },
-                    enabled = mutableStateOf(value = true),
+                    enabled = mutableStateOf(stateCheckbox),
                     uncheckedColor = SayajinColor.getColor().YellowBrand100,
                     checkedColor = SayajinColor.getColor().RedBrand100,
                     checkmarkColor = SayajinColor.getColor().WhiteBrand100,
@@ -271,7 +288,7 @@ fun DefaultPreview(ctx: Context?) {
                 )
                 UICheckBoxText(
                     onState = { },
-                    enabled = mutableStateOf(value = true),
+                    enabled = mutableStateOf(stateCheckbox),
                     uncheckedColor = SayajinColor.getColor().BackgroundScreen,
                     scale = 1f,
                     text = "Accept contract",
@@ -282,7 +299,7 @@ fun DefaultPreview(ctx: Context?) {
                 )
                 UICheckBoxText(
                     onState = { },
-                    enabled = mutableStateOf(value = true),
+                    enabled = mutableStateOf(stateCheckbox),
                     uncheckedColor = SayajinColor.getColor().BlueBrand100,
                     scale = 1f,
                     text = "Accept contract",
