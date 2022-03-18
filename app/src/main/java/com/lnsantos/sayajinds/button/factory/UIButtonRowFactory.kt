@@ -54,6 +54,7 @@ internal object UIButtonRowFactory {
                     contentScale = it.scale,
                     modifier = it.modifier
                 )
+                Spacer(modifier = Modifier.size(16.dp))
             }
 
             Text(
@@ -84,6 +85,16 @@ internal object UIButtonRowFactory {
                 }
 
                 return@UIButtonRowScope
+            }
+
+            style.image?.let {
+                Image(
+                    painter = painterResource(id = it.icon),
+                    contentDescription = it.contentDescription,
+                    contentScale = it.scale,
+                    modifier = it.modifier
+                )
+                Spacer(modifier = Modifier.size(16.dp))
             }
 
             Text(

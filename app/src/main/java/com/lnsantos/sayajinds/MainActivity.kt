@@ -5,17 +5,30 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.ExperimentalUnitApi
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.lnsantos.sayajinds.button.UIButton
+import com.lnsantos.sayajinds.button.options.UIButtonImage
 import com.lnsantos.sayajinds.button.options.UIButtonLoading
 import com.lnsantos.sayajinds.button.options.UIButtonStyle
+import com.lnsantos.sayajinds.color.SayajinColor
+import com.lnsantos.sayajinds.color.SayajinModeColor
 import com.lnsantos.sayajinds.ui.theme.SayajinColors
 import com.lnsantos.sayajinds.ui.theme.SayajinDSTheme
 
@@ -27,15 +40,18 @@ internal class MainActivity : ComponentActivity() {
             SayajinDSTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = SayajinColor.UI.BackgroundScreen
                 ) {
-                    DefaultPreview(ctx = this)
+                    Column() {
+                        DefaultPreview(ctx = this@MainActivity)
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalUnitApi::class)
 @Preview(
     showBackground = true,
     showSystemUi = true
@@ -46,77 +62,178 @@ fun DefaultPreview(ctx: Context?) {
     var enabledLoading by remember { mutableStateOf(false) }
 
     Column(
-        Modifier.padding(12.dp)
+        modifier = Modifier.background(SayajinColor.UI.BackgroundScreen)
     ) {
-
-        UIButton(
-            style = UIButtonStyle.Simples(
-                backgroundColor = SayajinColors.YellowBrand300,
-                text = "Loading  $enabledLoading",
-                textColor = SayajinColors.Purple700,
-                enabled = true,
-                rippleColor = SayajinColors.YellowBrand100
+        Text(
+            text = "Sayajin Design System",
+            fontSize = TextUnit(26f, TextUnitType.Sp),
+            fontWeight = FontWeight.Bold,
+            style = TextStyle(
+                color = SayajinColor.getColor().YellowBrand100
             ),
-            onClickCallback = {
-                enabledLoading = !enabledLoading
-            }
+            modifier = Modifier.padding(24.dp).align(Alignment.CenterHorizontally),
+            textAlign = TextAlign.Center
         )
+        Column(
+            Modifier
+                .padding(12.dp)
+                .background(Color.Transparent)
+        ) {
 
-        Spacer(modifier = Modifier.size(16.dp))
-
-        UIButton(
-            style = UIButtonStyle.Simples(
-                backgroundColor = SayajinColors.YellowBrand300,
-                text = "isDisable  $enabledButton",
-                textColor = SayajinColors.Purple700,
-                enabled = true,
-                rippleColor = SayajinColors.YellowBrand100
-            ),
-            onClickCallback = {
-                enabledButton = !enabledButton
-            }
-        )
-
-        Spacer(modifier = Modifier.size(16.dp))
-
-        UIButton(
-            style = UIButtonStyle.Simples(
-                backgroundColor = SayajinColors.YellowBrand300,
-                text = "Simple loading",
-                enabled = enabledButton,
-                loadingSettings = UIButtonLoading(
-                    color = Color.Black,
-                    enableLoading = enabledLoading
+            Row {
+                UIButton(
+                    style = UIButtonStyle.Simples(
+                        backgroundColor = SayajinColor.UI.BackgroundMainStyle,
+                        text = "Loading ${
+                            if (enabledLoading) "[ON]" else "[OFF]"
+                        } ",
+                        textColor = SayajinColor.UI.WhiteBrand100,
+                        enabled = true,
+                        rippleColor = SayajinColor.UI.YellowBrand100
+                    ),
+                    onClickCallback = {
+                        enabledLoading = !enabledLoading
+                    },
+                    modifier = Modifier.width(200.dp)
                 )
-            ),
-            onClickCallback = {
-                ctx?.let {
-                    Toast.makeText(it,"Loading", Toast.LENGTH_LONG).show()
-                }
+
+                Spacer(modifier = Modifier.size(16.dp))
+
+                UIButton(
+                    style = UIButtonStyle.Simples(
+                        backgroundColor = SayajinColor.UI.BackgroundMainStyle,
+                        text = "isDisable  ${
+                            if (enabledButton) "[ON]" else "[OFF]"
+                        } ",
+                        textColor = SayajinColor.UI.WhiteBrand100,
+                        enabled = true,
+                        rippleColor = SayajinColor.UI.YellowBrand100
+                    ),
+                    onClickCallback = {
+                        enabledButton = !enabledButton
+                    },
+                    modifier = Modifier.width(200.dp)
+                )
+            }
+            Spacer(modifier = Modifier.size(16.dp))
+            Row(modifier = Modifier.background(Color.Transparent)) {
+                UIButton(
+                    style = UIButtonStyle.Simples(
+                        backgroundColor = SayajinColor.UI.BackgroundMainStyle,
+                        text = "Change color ${
+                            if (SayajinModeColor.isDarkMode.value) "[ON]" else "[OFF]"
+                        } ",
+                        textColor = SayajinColor.UI.WhiteBrand100,
+                        enabled = true,
+                        rippleColor = SayajinColor.UI.YellowBrand100
+                    ),
+                    onClickCallback = {
+                        SayajinModeColor.changeMode()
+                    },
+                    modifier = Modifier.width(200.dp)
+                )
 
             }
-        )
-        Spacer(modifier = Modifier.size(16.dp))
 
-        UIButton(
-            style = UIButtonStyle.Outline(
-                text = "Simple loading",
-                enabled = enabledButton,
-                loadingSettings = UIButtonLoading(
-                    color = Color.Black,
-                    enableLoading = enabledLoading
+            Spacer(modifier = Modifier.size(16.dp))
+
+            UIButton(
+                style = UIButtonStyle.Simples(
+                    backgroundColor = SayajinColor.getColor().BackgroundExempleStyle,
+                    text = "Simple loading",
+                    textColor = SayajinColor.getColor().WhiteBrand100,
+                    enabled = enabledButton,
+                    loadingSettings = UIButtonLoading(
+                        color = SayajinColor.getColor().RedBrand100,
+                        enableLoading = enabledLoading
+                    )
                 ),
-                interactionColor = SayajinColors.Purple700,
-                borderColor = Color.Black
-            ),
-            onClickCallback = {
+                onClickCallback = {
+                    ctx?.let {
+                        Toast.makeText(it, "Loading", Toast.LENGTH_LONG).show()
+                    }
 
-                ctx?.let {
-                    Toast.makeText(it,"Outline", Toast.LENGTH_LONG).show()
-                }
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+            Spacer(modifier = Modifier.size(16.dp))
 
-            }
-        )
+            UIButton(
+                style = UIButtonStyle.Outline(
+                    text = "Outline loading",
+                    textColor = SayajinColor.getColor().RedBrand100,
+                    enabled = enabledButton,
+                    loadingSettings = UIButtonLoading(
+                        color = SayajinColor.getColor().YellowBrand100,
+                        enableLoading = enabledLoading
+                    ),
+                    interactionColor = SayajinColor.getColor().YellowBrand100,
+                    borderColor = SayajinColor.getColor().YellowBrand100
+                ),
+                onClickCallback = {
+
+                    ctx?.let {
+                        Toast.makeText(it, "Outline", Toast.LENGTH_LONG).show()
+                    }
+
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.size(16.dp))
+
+            UIButton(
+                style = UIButtonStyle.Outline(
+                    text = "Icon",
+                    textColor = SayajinColor.getColor().BackgroundScreen,
+                    enabled = enabledButton,
+                    loadingSettings = UIButtonLoading(
+                        color = SayajinColor.getColor().BackgroundScreen,
+                        enableLoading = enabledLoading
+                    ),
+                    interactionColor = SayajinColor.getColor().BackgroundMainStyle,
+                    borderColor = SayajinColor.getColor().RedBrand100,
+                    imagem = UIButtonImage(
+                        icon = android.R.drawable.ic_input_add
+                    )
+                ),
+                onClickCallback = {
+
+                    ctx?.let {
+                        Toast.makeText(it, "Outline", Toast.LENGTH_LONG).show()
+                    }
+
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Transparent)
+            )
+
+            Spacer(modifier = Modifier.size(16.dp))
+            UIButton(
+                style = UIButtonStyle.Simples(
+                    backgroundColor = SayajinColor.getColor().RedBrand100,
+                    text = "Simple Icon loading",
+                    textColor = SayajinColor.getColor().YellowBrand100,
+                    enabled = enabledButton,
+                    loadingSettings = UIButtonLoading(
+                        color = SayajinColor.getColor().RedBrand200,
+                        enableLoading = enabledLoading
+                    ),
+                    imagem = UIButtonImage(
+                        icon = android.R.drawable.ic_dialog_map
+                    )
+                ),
+                onClickCallback = {
+                    ctx?.let {
+                        Toast.makeText(it, "Loading", Toast.LENGTH_LONG).show()
+                    }
+
+                },
+                modifier = Modifier.fillMaxWidth()
+            )
+
+        }
     }
 
 }

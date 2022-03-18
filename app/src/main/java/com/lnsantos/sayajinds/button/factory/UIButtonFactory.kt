@@ -28,7 +28,8 @@ internal object UIButtonFactory {
         loadingSettings = style.loadingSettings,
         interactionColor = style.interactionColor,
         borderColor = style.borderColor.isColorDisable(style.enabled, Color.Transparent),
-        backgroundColor = ButtonDefaults.outlinedButtonColors()
+        backgroundColor = ButtonDefaults.outlinedButtonColors(Color.Transparent,Color.Transparent,Color.Transparent),
+        image = style.imagem
     )
 
     @Composable
@@ -42,7 +43,8 @@ internal object UIButtonFactory {
         textColor = style.textColor.isColorDisable(style.enabled, SayajinColors.GrayBrand200),
         buttonEnabled = style.enabled,
         rippleColor = style.rippleColor.isColorDisable(style.enabled, Color.Unspecified),
-        loadingSettings = style.loadingSettings
+        loadingSettings = style.loadingSettings,
+        image = style.imagem
     )
 
 }

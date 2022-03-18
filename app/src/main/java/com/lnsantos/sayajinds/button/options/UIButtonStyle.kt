@@ -12,7 +12,8 @@ sealed class UIButtonStyle {
         val textColor: Color = SayajinColors.WhiteBrand100,
         val rippleColor: Color = Color.Unspecified,
         val enabled: Boolean = true,
-        val loadingSettings: UIButtonLoading? = null
+        val loadingSettings: UIButtonLoading? = null,
+        val imagem: UIButtonImage? = null
     ) : UIButtonStyle()
 
     data class Outline(
@@ -22,7 +23,8 @@ sealed class UIButtonStyle {
         val borderColor: Color,
         val isBorderDouble: Boolean = false,
         val enabled: Boolean = true,
-        val loadingSettings: UIButtonLoading? = null
+        val loadingSettings: UIButtonLoading? = null,
+        val imagem: UIButtonImage? = null
     ) : UIButtonStyle()
 
 }

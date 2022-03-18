@@ -18,7 +18,7 @@ internal fun Color.isColorDisable(isEnabled: Boolean, disableColor: Color) : Col
 @Composable
 internal fun Color.isColorDisableOutlined(isEnabled: Boolean) = ButtonDefaults.outlinedButtonColors(
     backgroundColor = this.isColorDisable(isEnabled = isEnabled, SayajinColors.GrayBrand100),
-    disabledContentColor = SayajinColors.GrayBrand100
+    disabledContentColor = Color.Transparent
 )
 
 @Composable

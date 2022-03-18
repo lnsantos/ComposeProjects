@@ -4,6 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
@@ -93,7 +94,8 @@ fun UIButton(
     val settings = UIButtonFactory(style)
 
     modifier.applyRippleEffect(onClickCallback, settings.rippleColor)
-    modifier.fillMaxWidth()
+
+    // modifier.fillMaxWidth()
     modifier.animateContentSize(
         animationSpec = tween(
             durationMillis = 300,
@@ -101,6 +103,7 @@ fun UIButton(
         ),
         finishedListener = { _, _ ->
             modifier.clip(CircleShape)
+            modifier.background(Color.Transparent)
         }
     )
 
@@ -109,7 +112,7 @@ fun UIButton(
     } else onClickCallback
 
     Surface(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier.background(Color.Transparent)
     ) {
         when (settings.type) {
             is UIButtonStyle.Simples -> UISimpleButton(
@@ -142,7 +145,7 @@ internal object UIOutlineButton {
 
         modifier.onFocusChanged {
             haveFocusBackgroundColor =
-                if (it.hasFocus) settings.interactionColor else Color.Transparent
+                if (it.isCaptured) settings.interactionColor else Color.Transparent.copy(0f)
         }
 
         OutlinedButton(
