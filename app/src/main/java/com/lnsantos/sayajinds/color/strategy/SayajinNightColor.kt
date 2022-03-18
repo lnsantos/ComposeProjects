@@ -14,5 +14,6 @@ class SayajinNightColor : SayajinThemeColor {
     override val BackgroundExempleStyle: Color = Color(0xFF19721D)
     override val RedBrand100 : Color = Color(0xFF831E16)
     override val RedBrand200 : Color = Color(0xFF310B08)
+    override val BlueBrand100: Color = Color(0xFF0B7B8A)
     override val BackgroundScreen : Color = Color(0xFF70EFFF)
 }

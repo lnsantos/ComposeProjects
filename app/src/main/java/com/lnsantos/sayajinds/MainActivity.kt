@@ -27,6 +27,7 @@ import com.lnsantos.sayajinds.button.UIButton
 import com.lnsantos.sayajinds.button.options.UIButtonImage
 import com.lnsantos.sayajinds.button.options.UIButtonLoading
 import com.lnsantos.sayajinds.button.options.UIButtonStyle
+import com.lnsantos.sayajinds.checkbox.UICheckBoxText
 import com.lnsantos.sayajinds.color.SayajinColor
 import com.lnsantos.sayajinds.color.SayajinModeColor
 import com.lnsantos.sayajinds.ui.theme.SayajinColors
@@ -71,7 +72,9 @@ fun DefaultPreview(ctx: Context?) {
             style = TextStyle(
                 color = SayajinColor.getColor().YellowBrand100
             ),
-            modifier = Modifier.padding(24.dp).align(Alignment.CenterHorizontally),
+            modifier = Modifier
+                .padding(24.dp)
+                .align(Alignment.CenterHorizontally),
             textAlign = TextAlign.Center
         )
         Column(
@@ -232,6 +235,64 @@ fun DefaultPreview(ctx: Context?) {
                 },
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.size(16.dp))
+            Text(
+                text = "CheckBox",
+                fontSize = TextUnit(18f, TextUnitType.Sp),
+                fontWeight = FontWeight.Bold,
+                style = TextStyle(
+                    color = SayajinColor.getColor().WhiteBrand100
+                ),
+                modifier = Modifier
+                    .padding(24.dp)
+                    .align(Alignment.CenterHorizontally),
+                textAlign = TextAlign.Center
+            )
+            Column(
+                Modifier.background(Color(0xFFECA6E9))
+            ) {
+                UICheckBoxText(
+                    onState = { },
+                    enabled = mutableStateOf(value = true),
+                    uncheckedColor = SayajinColor.getColor().BlueBrand100,
+                    scale = 1f,
+                    text = "Accept contract",
+                    fontColor = SayajinColor.getColor().RedBrand100
+                )
+                UICheckBoxText(
+                    onState = { },
+                    enabled = mutableStateOf(value = true),
+                    uncheckedColor = SayajinColor.getColor().YellowBrand100,
+                    checkedColor = SayajinColor.getColor().RedBrand100,
+                    checkmarkColor = SayajinColor.getColor().WhiteBrand100,
+                    scale = 1f,
+                    text = "Accept contract",
+                    fontColor = SayajinColor.getColor().WhiteBrand100
+                )
+                UICheckBoxText(
+                    onState = { },
+                    enabled = mutableStateOf(value = true),
+                    uncheckedColor = SayajinColor.getColor().BackgroundScreen,
+                    scale = 1f,
+                    text = "Accept contract",
+                    fontColor = SayajinColor.getColor().RedBrand100,
+                    checkedColor = SayajinColor.getColor().RedBrand200,
+                    checkmarkColor = SayajinColor.getColor().YellowBrand300,
+                    fontWeight = FontWeight.Light
+                )
+                UICheckBoxText(
+                    onState = { },
+                    enabled = mutableStateOf(value = true),
+                    uncheckedColor = SayajinColor.getColor().BlueBrand100,
+                    scale = 1f,
+                    text = "Accept contract",
+                    fontColor = SayajinColor.getColor().YellowBrand300,
+                    checkedColor = SayajinColor.getColor().YellowBrand100,
+                    checkmarkColor = SayajinColor.getColor().YellowBrand300,
+                    fontWeight = FontWeight.W100,
+                    fontSize = 24f
+                )
+            }
 
         }
     }
